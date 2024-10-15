@@ -1,0 +1,3 @@
+[submodule "build"]
+	path = build
+	url = https://android.googlesource.com/kernel/build

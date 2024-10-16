@@ -20,11 +20,17 @@ jobs:
       - name: Download prebuilt toolchain and Clone kernel source
         run: |
           sudo apt-get update
-          sudo apt-get install -y repo git git-lfs zip
+          sudo apt-get install -y git git-lfs zip
+          
+          mkdir -p ~/.bin
+          PATH="${HOME}/.bin:${PATH}"
+          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+          chmod a+rx ~/.bin/repo
+
           mkdir android_build
           cd android_build
-          repo init -u https://github.com/FlyLoongZ/android_gki_kernel_5.10_common -b repo_xml --git-lfs
-          repo sync
+          ~/.bin/repo init -u https://github.com/FlyLoongZ/android_gki_kernel_5.10_common -b repo_xml --git-lfs
+          ~/.bin/repo sync
           
       - name: Build Kernel
         run: |
@@ -37,7 +43,7 @@ jobs:
         id: generate-kernel
         run: basename $(find ./out/android12-5.10/staging/lib/modules/ -name "*android12*") >> $GITHUB_OUTPUT
       
-      - name: Package kerenl
+      - name: Package Kerenl
         run: |
           git clone --depth=1 https://github.com/FlyLoongZ/AnyKernel3
           cp out/android12-5.10/dist/Image AnyKernel3/Image

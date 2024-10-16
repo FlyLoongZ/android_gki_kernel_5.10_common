@@ -19,8 +19,8 @@ jobs:
       
       - name: Download prebuilt toolchain and Clone kernel source
         run: |
-          sudo apt update
-          sudo apt install -y repo which git git-lfs ccache zip
+          sudo apt-get update
+          sudo apt-get install -y repo which git git-lfs ccache zip
           mkdir android_build
           cd android_build
           repo init -u https://github.com/FlyLoongZ/android_gki_kernel_5.10_common -b repo_xml --git-lfs

@@ -51,7 +51,7 @@ jobs:
 
       - name: Read Kernel Version
         id: generate-kernel
-        run: basename $(find ./android_build/out/android12-5.10/staging/lib/modules/ -name "*android12*") >> $GITHUB_OUTPUT
+        run: echo KERNEL_VERSION=$(basename $(find ./android_build/out/android12-5.10/staging/lib/modules/ -name "*android12*")) >> $GITHUB_OUTPUT
       
       - name: Package Kerenl
         run: |

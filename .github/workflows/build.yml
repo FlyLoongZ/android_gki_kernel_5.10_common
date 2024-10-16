@@ -3,6 +3,11 @@ name: Build Android gki Kernel
 on:
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./build
+
 jobs:
   build-kernel:
     runs-on: ubuntu-latest

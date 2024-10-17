@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Setup CCache
         uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          max-size: 5G          
         
       - name: Set build Date
         id: set-env-date
@@ -46,10 +48,7 @@ jobs:
           ln -s /usr/bin/ccache clang
           
           cd ..
-          export LTO=thin
-          export CCACHE_LOCAL_PATH=.bin
-          export BUILD_CONFIG=common/build.config.gki.aarch64
-          build/build.sh
+          LTO=thin CCACHE_LOCAL_PATH=.bin BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh
           
       - name: Read Kernel Version
         id: set-env-kernel-version

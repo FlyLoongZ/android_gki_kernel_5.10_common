@@ -40,9 +40,15 @@ jobs:
           
       - name: Build Kernel
         run: |
-          export LTO=thin
-          export BUILD_CONFIG=common/build.config.gki.aarch64
           cd android_build
+          mkdir .bin
+          cd .bin
+          ln -s /usr/bin/ccache clang
+          
+          cd ..
+          export LTO=thin
+          export CCACHE_LOCAL_PATH=.bin
+          export BUILD_CONFIG=common/build.config.gki.aarch64
           build/build.sh
           
       - name: Read Kernel Version
